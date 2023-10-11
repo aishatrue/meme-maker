@@ -1,20 +1,20 @@
 const canvas = document.querySelector("canvas");
+const button = document.querySelector(".color-button");
 
 // 캔버스에 그림을 그릴때 사용하는 것. canvas는 html의 한 element
 const ctx = canvas.getContext("2d");
 
 canvas.width = 800;
 canvas.height = 800;
+ctx.lineWidth = 2;
+const colors = ["red", "#e67e22", "#1abc9c", "#f1c40f"];
 
-ctx.fillRect(210 - 40, 200, 15, 100);
-ctx.fillRect(350 - 40, 200, 15, 100);
-ctx.fillRect(260 - 40, 200, 60, 200);
+function onClick(event) {
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+  ctx.arc(event.offsetX, event.offsetY, 3, 0, 2 * Math.PI);
+  ctx.fill();
+}
 
-ctx.arc(250, 100 + 30, 50, 0, 2 * Math.PI);
-ctx.fill();
-
-ctx.beginPath();
-ctx.fillStyle = "white";
-ctx.arc(260 + 10, 80 + 30, 8, 1 * Math.PI, 2 * Math.PI);
-ctx.arc(220 + 10, 80 + 30, 8, 1 * Math.PI, 2 * Math.PI);
-ctx.fill();
+canvas.addEventListener("mousemove", onClick);
