@@ -1,4 +1,5 @@
 const canvas = document.querySelector("canvas");
+const linewidth = document.getElementById("line-width");
 const default_button = document.querySelector(".default");
 const first_button = document.querySelector(".first");
 const second_button = document.querySelector(".second");
@@ -12,7 +13,7 @@ colors = ["#fc5c65", "#fd9644", "#fed330", "#26de81"];
 
 canvas.width = 800;
 canvas.height = 800;
-ctx.lineWidth = 2;
+ctx.lineWidth = linewidth.value;
 
 let isPainting = false;
 let currentColor = "black";
@@ -24,6 +25,7 @@ function onMove(event) {
     ctx.stroke();
     return;
   } else {
+    ctx.beginPath();
     ctx.moveTo(event.offsetX, event.offsetY);
   }
 }
@@ -34,6 +36,10 @@ function startPainting() {
 
 function cancelPainting() {
   isPainting = false;
+}
+
+function onLineWidthChange(event) {
+  ctx.lineWidth = event.target.value;
 }
 
 canvas.addEventListener("mousemove", onMove);
@@ -70,3 +76,5 @@ third_button.addEventListener("click", choseColor);
 fourth_button.addEventListener("click", choseColor);
 default_button.addEventListener("click", choseColor);
 eraser.addEventListener("click", choseColor);
+
+linewidth.addEventListener("change", onLineWidthChange);
