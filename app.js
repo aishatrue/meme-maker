@@ -6,8 +6,13 @@ const colorOptions = Array.from(
 );
 
 const modeOptions = document.getElementById("mode-button");
+const destroyOptions = document.getElementById("destroy-button");
+const eraserOptions = document.getElementById("eraser-button");
 // 캔버스에 그림을 그릴때 사용하는 것. canvas는 html의 한 element
 const ctx = canvas.getContext("2d");
+
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
 
 canvas.width = 800;
 canvas.height = 800;
@@ -15,6 +20,7 @@ ctx.lineWidth = linewidth.value;
 
 let isPainting = false;
 let isFilling = false;
+let isDestroying = false;
 
 function onMove(event) {
   if (isPainting) {
@@ -61,15 +67,24 @@ function onModeChange(event) {
 
 function onCanvasClick(event) {
   if (isFilling) {
-    ctx.fillRect(0, 0, 700, 700);
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }
+}
+
+function onDestroyClick(event) {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+function onEraserClick(event) {
+  ctx.strokeStyle = "white";
+  isFilling = false;
+  modeOptions.innerText = "Fill";
 }
 
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
-
-// document.addEventListener("mouseup", onMouseUp);
 
 canvas.addEventListener("mouseleave", cancelPainting);
 
@@ -79,3 +94,5 @@ color.addEventListener("change", onColorChange);
 
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeOptions.addEventListener("click", onModeChange);
+destroyOptions.addEventListener("click", onDestroyClick);
+eraserOptions.addEventListener("click", onEraserClick);
