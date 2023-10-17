@@ -1,9 +1,13 @@
+const saveBtn = document.getElementById("save");
 const canvas = document.querySelector("canvas");
 const linewidth = document.getElementById("line-width");
 const color = document.getElementById("color");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
+
+const fileInput = document.getElementById("file");
+const textInput = document.getElementById("text");
 
 const modeOptions = document.getElementById("mode-button");
 const destroyOptions = document.getElementById("destroy-button");
@@ -16,6 +20,7 @@ const CANVAS_HEIGHT = 800;
 
 canvas.width = 800;
 canvas.height = 800;
+ctx.linecap = "round";
 ctx.lineWidth = linewidth.value;
 
 let isPainting = false;
@@ -82,6 +87,40 @@ function onEraserClick(event) {
   modeOptions.innerText = "Fill";
 }
 
+function onFileChange(event) {
+  console.dir(event.target);
+  const file = event.target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    fileInput.value = null;
+  };
+}
+
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.save();
+    ctx.linewidth = 1;
+    ctx.font = "68px serif";
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    ctx.restore();
+  }
+}
+
+function onSaveClick(event) {
+  const url = canvas.toDataURL();
+  // 가짜 링크임.
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myDrawing.png";
+  a.click();
+}
+
+canvas.addEventListener("dblclick", onDoubleClick);
+
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", startPainting);
 canvas.addEventListener("mouseup", cancelPainting);
@@ -96,3 +135,5 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeOptions.addEventListener("click", onModeChange);
 destroyOptions.addEventListener("click", onDestroyClick);
 eraserOptions.addEventListener("click", onEraserClick);
+fileInput.addEventListener("change", onFileChange);
+saveBtn.addEventListener("click", onSaveClick);
