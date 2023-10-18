@@ -63,10 +63,10 @@ function onColorClick(event) {
 function onModeChange(event) {
   if (isFilling) {
     isFilling = false;
-    modeOptions.innerText = "Fill";
+    modeOptions.innerText = "🩸 Fill";
   } else {
     isFilling = true;
-    modeOptions.innerText = "Draw";
+    modeOptions.innerText = "🩸 Draw";
   }
 }
 
@@ -84,7 +84,7 @@ function onDestroyClick(event) {
 function onEraserClick(event) {
   ctx.strokeStyle = "white";
   isFilling = false;
-  modeOptions.innerText = "Fill";
+  modeOptions.innerText = "🩸 Fill";
 }
 
 function onFileChange(event) {

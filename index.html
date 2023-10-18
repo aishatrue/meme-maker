@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <canvas> </canvas>
-    <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
-    <div>
+    <div class="first-column">
       <input type="color" id="color" />
       <div
         class="color-option"
@@ -59,12 +57,26 @@
       ></div>
     </div>
 
-    <button id="mode-button">Fill</button>
-    <button id="destroy-button">Destroy</button>
-    <button id="eraser-button">Eraser</button>
-    <input type="file" accept="image/*" id="file" />
-    <input type="text" placeholder="Write and then double click" id="text" />
-    <button id="save">Save image</button>
+    <canvas> </canvas>
+
+    <div class="last-column">
+      <input
+        id="line-width"
+        type="range"
+        min="1"
+        max="10"
+        value="5"
+        step="0.5"
+      />
+      <button id="mode-button">🩸Fill</button>
+      <button id="destroy-button">💣 Destroy</button>
+      <button id="eraser-button">❌ Erase</button>
+      <label class="file-button" for="file"> 💅 Add Photo </label>
+      <input type="file" accept="image/*" id="file" style="display: none" />
+      <input type="text" placeholder="Write and then double click" id="text" />
+      <button id="save">🎨 Save image</button>
+    </div>
+
     <script src="app.js"></script>
   </body>
 </html>

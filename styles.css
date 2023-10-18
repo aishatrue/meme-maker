@@ -1,17 +1,67 @@
 canvas {
   width: 800px;
   height: 800px;
-  border: 5px solid black;
+  box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 body {
   display: flex;
-
+  background-color: azure;
   justify-content: center;
   align-items: center;
+}
+canvas {
+  background-color: white;
 }
 .color-option {
   width: 50px;
   height: 50px;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.color-option:hover {
+  transform: translateY(-10px);
+}
+
+.first-column {
+  margin-right: 20px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.first-column div {
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0px 2px 3px gray;
+}
+
+.last-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 200px;
+  height: 300px;
+  margin-left: 20px;
+}
+.last-column #text {
+  border: none;
+  box-shadow: 0px 2px 3px gray;
+  padding: 5px 5px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+button,
+.file-button {
+  background-color: #3e59d8;
+  border-radius: 6px;
+  border: none;
+  padding: 5px 0;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  box-shadow: 0px 2px 3px gray;
 }
