@@ -6,6 +6,7 @@ const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
 const fontOption = document.getElementById("font-style");
+const fontSizeOption = document.getElementById("font-size");
 const fileInput = document.getElementById("file");
 const textInput = document.getElementById("text");
 
@@ -102,6 +103,7 @@ function onFileChange(event) {
 
 function onDoubleClick(event) {
   const chooseFont = fontOption.value;
+  const FontSize = fontSizeOption.value;
   const text = textInput.value;
   if (text !== "") {
     ctx.save();
@@ -113,7 +115,7 @@ function onDoubleClick(event) {
       fontName = "Tagalog";
     }
 
-    ctx.font = `68px ${fontName}`;
+    ctx.font = `${fontSizeOption.value} ${fontName}`;
     console.log(ctx.font);
 
     ctx.fillText(text, event.offsetX, event.offsetY);
