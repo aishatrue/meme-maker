@@ -101,10 +101,17 @@ function onFileChange(event) {
 }
 
 function onDoubleClick(event) {
+  const chooseFont = fontOption.value;
   const text = textInput.value;
   if (text !== "") {
     ctx.save();
     ctx.linewidth = 1;
+
+    if (chooseFont == "1") {
+      fontName = "Roboto";
+    } else if (chooseFont == "2") {
+      fontName = "Tagalog";
+    }
 
     ctx.font = `68px ${fontName}`;
     console.log(ctx.font);
@@ -121,14 +128,6 @@ function onSaveClick(event) {
   a.href = url;
   a.download = "myDrawing.png";
   a.click();
-}
-function onFontChange(event) {
-  const chooseFont = fontOption.value;
-  if (chooseFont == "1") {
-    fontName = "Roboto";
-  } else if (chooseFont == "2") {
-    fontName = "Tagalog";
-  }
 }
 
 canvas.addEventListener("dblclick", onDoubleClick);
@@ -149,4 +148,3 @@ destroyOptions.addEventListener("click", onDestroyClick);
 eraserOptions.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
 saveBtn.addEventListener("click", onSaveClick);
-fontOption.addEventListener("change", onFontChange);
