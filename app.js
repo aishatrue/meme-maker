@@ -5,6 +5,7 @@ const color = document.getElementById("color");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
+const shapeOption = document.getElementById("shape-button");
 const strokeOption = document.getElementById("stroke-button");
 const fontOption = document.getElementById("font-style");
 const fontSizeOption = document.getElementById("font-size");
@@ -30,6 +31,7 @@ let isFilling = false;
 let isDestroying = false;
 let fontName = "";
 let isStroke = false;
+let isShape = false;
 
 function onMove(event) {
   if (isPainting) {
@@ -48,6 +50,10 @@ function startPainting() {
 
 function cancelPainting() {
   isPainting = false;
+  if (isShape) {
+    ctx.fill();
+  } else {
+  }
 }
 
 function onLineWidthChange(event) {
@@ -81,6 +87,16 @@ function onStrokeChange(event) {
   } else {
     isStroke = true;
     strokeOption.innerText = "✅ Stroke";
+  }
+}
+
+function onShapeChange(event) {
+  if (isShape) {
+    isShape = false;
+    shapeOption.innerText = "🤔 shape";
+  } else {
+    isShape = true;
+    shapeOption.innerText = "🤔 line";
   }
 }
 
@@ -166,3 +182,4 @@ eraserOptions.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
 saveBtn.addEventListener("click", onSaveClick);
 strokeOption.addEventListener("click", onStrokeChange);
+shapeOption.addEventListener("click", onShapeChange);
