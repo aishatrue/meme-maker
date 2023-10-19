@@ -5,6 +5,7 @@ const color = document.getElementById("color");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
+const strokeOption = document.getElementById("stroke-button");
 const fontOption = document.getElementById("font-style");
 const fontSizeOption = document.getElementById("font-size");
 const fileInput = document.getElementById("file");
@@ -28,6 +29,7 @@ let isPainting = false;
 let isFilling = false;
 let isDestroying = false;
 let fontName = "";
+let isStroke = false;
 
 function onMove(event) {
   if (isPainting) {
@@ -69,6 +71,16 @@ function onModeChange(event) {
   } else {
     isFilling = true;
     modeOptions.innerText = "🩸 Draw";
+  }
+}
+
+function onStrokeChange(event) {
+  if (isStroke) {
+    isStroke = false;
+    strokeOption.innerText = "✅ Fill";
+  } else {
+    isStroke = true;
+    strokeOption.innerText = "✅ Stroke";
   }
 }
 
@@ -116,9 +128,12 @@ function onDoubleClick(event) {
     }
 
     ctx.font = `${fontSizeOption.value} ${fontName}`;
-    console.log(ctx.font);
+    if (isStroke) {
+      ctx.fillText(text, event.offsetX, event.offsetY);
+    } else {
+      ctx.strokeText(text, event.offsetX, event.offsetY);
+    }
 
-    ctx.fillText(text, event.offsetX, event.offsetY);
     ctx.restore();
   }
 }
@@ -150,3 +165,4 @@ destroyOptions.addEventListener("click", onDestroyClick);
 eraserOptions.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
 saveBtn.addEventListener("click", onSaveClick);
+strokeOption.addEventListener("click", onStrokeChange);
