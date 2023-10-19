@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -73,7 +84,17 @@
       <button id="eraser-button">❌ Erase</button>
       <label class="file-button" for="file"> 💅 Add Photo </label>
       <input type="file" accept="image/*" id="file" style="display: none" />
+
       <input type="text" placeholder="Write and then double click" id="text" />
+
+      <form action="#">
+        <label for="font-style">🔠 Font style</label>
+        <select name="font-style" id="font-style">
+          <option value="1">Roboto</option>
+          <option value="2">Tagalog</option>
+        </select>
+      </form>
+
       <button id="save">🎨 Save image</button>
     </div>
 

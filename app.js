@@ -5,7 +5,7 @@ const color = document.getElementById("color");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
-
+const fontOption = document.getElementById("font-style");
 const fileInput = document.getElementById("file");
 const textInput = document.getElementById("text");
 
@@ -26,6 +26,7 @@ ctx.lineWidth = linewidth.value;
 let isPainting = false;
 let isFilling = false;
 let isDestroying = false;
+let fontName = "";
 
 function onMove(event) {
   if (isPainting) {
@@ -104,7 +105,10 @@ function onDoubleClick(event) {
   if (text !== "") {
     ctx.save();
     ctx.linewidth = 1;
-    ctx.font = "68px serif";
+
+    ctx.font = `68px ${fontName}`;
+    console.log(ctx.font);
+
     ctx.fillText(text, event.offsetX, event.offsetY);
     ctx.restore();
   }
@@ -117,6 +121,14 @@ function onSaveClick(event) {
   a.href = url;
   a.download = "myDrawing.png";
   a.click();
+}
+function onFontChange(event) {
+  const chooseFont = fontOption.value;
+  if (chooseFont == "1") {
+    fontName = "Roboto";
+  } else if (chooseFont == "2") {
+    fontName = "Tagalog";
+  }
 }
 
 canvas.addEventListener("dblclick", onDoubleClick);
@@ -137,3 +149,4 @@ destroyOptions.addEventListener("click", onDestroyClick);
 eraserOptions.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
 saveBtn.addEventListener("click", onSaveClick);
+fontOption.addEventListener("change", onFontChange);
